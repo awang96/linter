@@ -8,7 +8,7 @@
 ** Description : Functions to check the coding norms rules
 */
 
-#include "../header/coding_norms.h"
+#include "coding_norms.h"
 
 /*** Check if brackets is at the end of the line ***/
 /** Params **/

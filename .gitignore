@@ -1,3 +1,6 @@
+cmake-build-debug/
+*.depend
+*.layout
 # Prerequisites
 *.d
 bin/

@@ -8,7 +8,7 @@
 ** Description : Functions to get options from .lconf files
 */
 
-#include "../header/lconf.h"
+#include "lconf.h"
 
 /*** .lconf file opening ***/
 /** Params **/
@@ -54,7 +54,7 @@ Config* getKey(FILE *conf){
             if(keyFound[strlen(keyFound) - 1] == '\n')
                 keyFound[strlen(keyFound) - 1] = '\0';
             if(checkKey(keyFound)){
-                printf("Clés erronnées\n");
+                printf("Clï¿½s erronnï¿½es\n");
                 break;
             }
 // If a key is found, we'll parse through its values
@@ -182,7 +182,7 @@ int parseParent(char *filename, Config *conf){
             if(key[strlen(key) - 1] == '\n')
                 key[strlen(key) - 1] = '\0';
             if(checkKey(key)){
-                printf("Clés erronnées\n");
+                printf("Clï¿½s erronnï¿½es\n");
                 break;
             }
             while(fgets(line, LINE, f)){

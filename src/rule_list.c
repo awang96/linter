@@ -8,7 +8,7 @@
 ** Description : Functions to deal with RuleList data struct
 */
 
-#include "../header/rule_list.h"
+#include "rule_list.h"
 
 /*** Initialization of a RuleList list element ***/
 /** Params **/

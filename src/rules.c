@@ -8,7 +8,7 @@
 ** Description : Apply rules
 */
 
-#include "../header/rules.h"
+#include "rules.h"
 
 int applyRules(RuleList *r, FILE *f) {
 

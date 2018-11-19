@@ -8,7 +8,7 @@
 ** Description : Functions to deal with Variables data structures
 */
 
-#include "../header/variables.h"
+#include "variables.h"
 
 /*** Initialization of a Variables data structure ***/
 /** Params **/

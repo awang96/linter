@@ -9,7 +9,7 @@
 */
 
 
-#include "../header/file_list.h"
+#include "file_list.h"
 
 /*** Initialization of a FileList data struct ***/
 /** Params **/

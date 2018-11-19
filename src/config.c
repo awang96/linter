@@ -8,7 +8,7 @@
 ** Description : Functions to deal with the data struct Config
 */
 
-#include "../header/config.h"
+#include "config.h"
 
 /*** Initialization of a Config* data struct, which contains the Linter's options ***/
 /** Params **/

@@ -8,6 +8,6 @@
 ** Description : Functions to check coding rules in a C program
 */
 
-#include "../header/coding_rules.h"
+#include "coding_rules.h"
 
 

@@ -8,7 +8,7 @@
 ** Description : This file contains the main which executes the Linter.
 */
 
-#include "../header/main.h"
+#include "main.h"
 
 /*** Main ***/
 /** Params **/

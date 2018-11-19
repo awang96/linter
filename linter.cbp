@@ -32,28 +32,28 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="sources/header/coding_norms.h" />
-		<Unit filename="sources/header/config.h" />
-		<Unit filename="sources/header/file_list.h" />
-		<Unit filename="sources/header/lconf.h" />
-		<Unit filename="sources/header/rule_list.h" />
-		<Unit filename="sources/header/struct.h" />
-		<Unit filename="sources/src/coding_norms.c">
+		<Unit filename="header/coding_norms.h" />
+		<Unit filename="header/config.h" />
+		<Unit filename="header/file_list.h" />
+		<Unit filename="header/lconf.h" />
+		<Unit filename="header/rule_list.h" />
+		<Unit filename="header/struct.h" />
+		<Unit filename="src/coding_norms.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="sources/src/config.c">
+		<Unit filename="src/config.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="sources/src/file_list.c">
+		<Unit filename="src/file_list.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="sources/src/lconf.c">
+		<Unit filename="src/lconf.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="sources/src/main.c">
+		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="sources/src/rule_list.c">
+		<Unit filename="src/rule_list.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
