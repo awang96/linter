@@ -1,0 +1,19 @@
+=extends
+resources\\parent2.lconf
+exclu.txt
+
+=rules
+- array-bracket-eol=off
+- test=5
+- test=5
+
+
+=excludedFiles
+a.txt
+a.txt
+d.txt
+e.txt
+d.txt
+
+=recursive
+false

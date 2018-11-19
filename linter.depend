@@ -1,0 +1,228 @@
+# depslib dependency file v1.0
+1539699423 source:d:\cours2018-2019\c\projet\linter\file.c
+	"file.h"
+
+1539687833 d:\cours2018-2019\c\projet\linter\file.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+	"fileList.h"
+	"ruleList.h"
+	"config.h"
+
+1539701013 source:d:\cours2018-2019\c\projet\linter\main.c
+	<stdio.h>
+	<stdlib.h>
+	"file.h"
+
+1539610333 source:d:\cours2018-2019\c\projet\linter\key.c
+	"key.h"
+
+1539610338 d:\cours2018-2019\c\projet\linter\key.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+
+1539685696 d:\cours2018-2019\c\projet\linter\struct.h
+	<stdio.h>
+	<stdlib.h>
+
+1539689035 source:d:\cours2018-2019\c\projet\linter\filelist.c
+	"fileList.h"
+
+1539688357 d:\cours2018-2019\c\projet\linter\filelist.h
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	<string.h>
+
+1539699550 source:d:\cours2018-2019\c\projet\linter\rulelist.c
+	"ruleList.h"
+
+1539694899 d:\cours2018-2019\c\projet\linter\rulelist.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+
+1539698845 d:\cours2018-2019\c\projet\linter\config.h
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	"ruleList.h"
+	"fileList.h"
+
+1539699168 source:d:\cours2018-2019\c\projet\linter\config.c
+	"config.h"
+
+1539775299 source:d:\cours2018-2019\c\projet\linter\sources\src\config.c
+	"../header/config.h"
+
+1539781069 d:\cours2018-2019\c\projet\linter\sources\header\config.h
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	"rule_list.h"
+	"file_list.h"
+
+1539781440 d:\cours2018-2019\c\projet\linter\sources\header\struct.h
+	<stdio.h>
+	<stdlib.h>
+
+1539694899 d:\cours2018-2019\c\projet\linter\sources\header\rulelist.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+
+1539688357 d:\cours2018-2019\c\projet\linter\sources\header\filelist.h
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	<string.h>
+
+1539769918 source:d:\cours2018-2019\c\projet\linter\sources\src\file.c
+	"../header/file.h"
+
+1539769857 d:\cours2018-2019\c\projet\linter\sources\header\file.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+	"file_list.h"
+	"rule_list.h"
+	"config.h"
+
+1539766427 source:d:\cours2018-2019\c\projet\linter\sources\src\filelist.c
+	"../header/fileList.h"
+
+1539856136 source:d:\cours2018-2019\c\projet\linter\sources\src\main.c
+	<stdio.h>
+	<stdlib.h>
+	"../header/lconf.h"
+	"../header/config.h"
+
+1539764882 source:d:\cours2018-2019\c\projet\linter\sources\src\rulelist.c
+	"../header/ruleList.h"
+
+1539854536 d:\cours2018-2019\c\projet\linter\sources\header\rule_list.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+
+1539781089 d:\cours2018-2019\c\projet\linter\sources\header\file_list.h
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	<string.h>
+
+1539775876 source:d:\cours2018-2019\c\projet\linter\sources\src\file_list.c
+	"../header/file_list.h"
+
+1539856157 source:d:\cours2018-2019\c\projet\linter\sources\src\rule_list.c
+	"../header/rule_list.h"
+
+1539855604 source:d:\cours2018-2019\c\projet\linter\sources\src\lconf.c
+	"../header/lconf.h"
+
+1539854653 d:\cours2018-2019\c\projet\linter\sources\header\lconf.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+	"file_list.h"
+	"rule_list.h"
+	"config.h"
+
+1541673662 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\config.c
+	"../header/config.h"
+
+1541673087 d:\cours2018-2019\s1\c\projet\linter\sources\header\config.h
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	"rule_list.h"
+	"file_list.h"
+
+1542619285 d:\cours2018-2019\s1\c\projet\linter\sources\header\struct.h
+	<stdio.h>
+	<stdlib.h>
+
+1541673104 d:\cours2018-2019\s1\c\projet\linter\sources\header\rule_list.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+
+1541673078 d:\cours2018-2019\s1\c\projet\linter\sources\header\file_list.h
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	<string.h>
+
+1542625684 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\file_list.c
+	"../header/file_list.h"
+
+1541673041 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\lconf.c
+	"../header/lconf.h"
+
+1541673068 d:\cours2018-2019\s1\c\projet\linter\sources\header\lconf.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+	"file_list.h"
+	"rule_list.h"
+	"config.h"
+
+1542626906 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\main.c
+	"../header/main.h"
+
+1542617562 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\rule_list.c
+	"../header/rule_list.h"
+
+1541673695 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\coding_norms.c
+	"../header/coding_norms.h"
+
+1541673279 d:\cours2018-2019\s1\c\projet\linter\sources\header\coding_norms.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1542626145 d:\cours2018-2019\s1\c\projet\linter\sources\header\main.h
+	<stdio.h>
+	<stdlib.h>
+	"lconf.h"
+	"config.h"
+	"coding_norms.h"
+	"rules.h"
+
+1541674871 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\variable_rules.c
+	"../header/variable_rules.h"
+
+1541674782 d:\cours2018-2019\s1\c\projet\linter\sources\header\variable_rules.h
+	<stdio.h>
+	<stdlib.h>
+
+1542625647 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\variables.c
+	"../header/variables.h"
+
+1542620475 d:\cours2018-2019\s1\c\projet\linter\sources\header\variables.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+
+1542626037 d:\cours2018-2019\s1\c\projet\linter\sources\header\rules.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struct.h"
+	"coding_norms.h"
+
+1542626921 source:d:\cours2018-2019\s1\c\projet\linter\sources\src\rules.c
+	"../header/rules.h"
+

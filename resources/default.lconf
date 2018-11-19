@@ -1,0 +1,18 @@
+=extends
+resources\\parent.lconf
+
+=rules
+- array-bracket-eol=on
+- operators-spacing=off
+- comma-spacing=on
+- indent=4
+
+=excludedFiles
+a.txt
+a.txt
+b.txt
+c.txt
+b.txt
+
+=recursive
+true

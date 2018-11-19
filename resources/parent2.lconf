@@ -1,0 +1,15 @@
+=extends
+resources\\parent2.lconf
+suite.txt
+
+=rules
+- parent=on
+- parent=on
+
+
+=excludedFiles
+d.txt
+f.txt
+
+=recursive
+false
