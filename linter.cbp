@@ -14,6 +14,7 @@
 				<Option parameters="resources\\default.lconf" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="header" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -23,6 +24,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="header" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -33,15 +35,27 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="header/coding_norms.h" />
+		<Unit filename="header/coding_rules.h" />
 		<Unit filename="header/config.h" />
+		<Unit filename="header/error.h" />
 		<Unit filename="header/file_list.h" />
 		<Unit filename="header/lconf.h" />
+		<Unit filename="header/main.h" />
 		<Unit filename="header/rule_list.h" />
+		<Unit filename="header/rules.h" />
 		<Unit filename="header/struct.h" />
+		<Unit filename="header/variable_rules.h" />
+		<Unit filename="header/variables.h" />
 		<Unit filename="src/coding_norms.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/coding_rules.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/error.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/file_list.c">
@@ -56,8 +70,19 @@
 		<Unit filename="src/rule_list.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/rules.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/variable_rules.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/variables.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
-			<code_completion />
+			<code_completion>
+				<search_path add="header" />
+			</code_completion>
 			<envvars />
 			<debugger />
 		</Extensions>
