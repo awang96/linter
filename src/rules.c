@@ -22,8 +22,9 @@ int applyRules(RuleList* r, FILE* f)
     if (!r) {
         return 1;
     }
-    RuleList* p = r;
+    RuleList* p;
     while (fgets(line, 200, f)) {
+        p = r;
         nb_line += 1;
 
         if ((lineWoComment = removeComment(line, &comment)) == NULL) {
@@ -74,6 +75,7 @@ char* removeComment(char* line, int* comment)
         if (index[0] == line[0]) {
             return NULL;
         }
+        len = strlen(line) - strlen(index);
         int onlySpaces = 1;
         for (size_t i = 0; i < len; i += 1) {
             if (line[i] != ' ') {
@@ -84,7 +86,6 @@ char* removeComment(char* line, int* comment)
         if (onlySpaces) {
             return NULL;
         }
-        len = strlen(line) - strlen(index);
         ret = malloc(len * sizeof(char));
         strncpy(ret, line, len);
         ret[len - 1] = '\0';
