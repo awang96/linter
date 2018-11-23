@@ -13,6 +13,7 @@
 #include <string.h>
 #include "struct.h"
 
+
 #ifndef CODING_RULES_H
 #define CODING_RULES_H
 

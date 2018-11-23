@@ -16,14 +16,17 @@
    char *value : value of the rule */
 /** Return **/
 /* RuleList* : a RuleList list element */
-RuleList* initRuleList(char *name, char *value){
+RuleList* initRuleList(char* name, char* value)
+{
 
-    RuleList *rule;
-    if(!name || !value)
+    RuleList* rule;
+    if (!name || !value) {
         return NULL;
+    }
     rule = malloc(sizeof(RuleList));
-    if(!rule)
+    if (!rule) {
         return NULL;
+    }
     rule->name = name;
     rule->value = assignValue(value);
     free(value);
@@ -37,15 +40,17 @@ RuleList* initRuleList(char *name, char *value){
 /* char *value: String, value of the rule (on, off or n) */
 /** Return **/
 /* unsigned int : value of the rule (0 => off, 1 => on or n) */
-unsigned int assignValue(char *value){
+unsigned int assignValue(char* value)
+{
 
-    if(!value)
+    if (!value) {
         return 0;
-    if(!strcmp(value, "on"))
+    }
+    if (!strcmp(value, "on")) {
         return 1;
-    else if(!strcmp(value, "off"))
+    } else if (!strcmp(value, "off")) {
         return 0;
-    else{
+    } else {
         return atoi(value);
     }
 
@@ -58,42 +63,45 @@ unsigned int assignValue(char *value){
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int addRule(RuleList **rl, char *line){
+int addRule(RuleList** rl, char* line)
+{
 
-    RuleList *element;
-    RuleList *p;
-    char *name;
-    char *value;
-    if(!line)
+    RuleList* element;
+    RuleList* p;
+    char* name;
+    char* value;
+    if (!line) {
         return 1;
+    }
     name = malloc(sizeof(char) * strlen(line));
-    if(!name)
+    if (!name) {
         return 1;
+    }
     value = malloc(sizeof(char) * strlen(line));
-    if(!value){
+    if (!value) {
         free(name);
         return 1;
     }
-    if(setNameValue(line, name, value)){
+    if (setNameValue(line, name, value)) {
         free(name);
         free(value);
         return 1;
     }
     p = *rl;
-    if(!p){
+    if (!p) {
         *rl = initRuleList(name, value);
         return 0;
     }
-    if(!p->next){
-        if(!strcmp(p->name, name)){
+    if (!p->next) {
+        if (!strcmp(p->name, name)) {
             p->value = assignValue(value);
             free(name);
             free(value);
             return 0;
         }
     }
-    while(p->next){
-        if(!strcmp(p->name, name)){
+    while (p->next) {
+        if (!strcmp(p->name, name)) {
             p->value = assignValue(value);
             free(name);
             free(value);
@@ -101,69 +109,75 @@ int addRule(RuleList **rl, char *line){
         }
         p = p->next;
     }
-    if(!strcmp(p->name, name)){
+    if (!strcmp(p->name, name)) {
         p->value = assignValue(value);
         free(name);
         free(value);
         return 0;
     }
     element = initRuleList(name, value);
-    if(!element)
+    if (!element) {
         return 1;
+    }
     p->next = element;
     return 0;
 
 }
 
-int addRuleParent(RuleList **rl, char *line){
 
-    RuleList *element;
-    RuleList *p;
-    char *name;
-    char *value;
-    if(!line)
+int addRuleParent(RuleList** rl, char* line)
+{
+
+    RuleList* element;
+    RuleList* p;
+    char* name;
+    char* value;
+    if (!line) {
         return 1;
+    }
     name = malloc(sizeof(char) * strlen(line));
-    if(!name)
+    if (!name) {
         return 1;
+    }
     value = malloc(sizeof(char) * strlen(line));
-    if(!value){
+    if (!value) {
         free(name);
         return 1;
     }
-    if(setNameValue(line, name, value)){
+    if (setNameValue(line, name, value)) {
         free(name);
         free(value);
         return 1;
     }
     p = *rl;
-    if(!p){
+    if (!p) {
         *rl = initRuleList(name, value);
         return 0;
     }
-    if(!p->next){
-        if(!strcmp(p->name, name)){
+    if (!p->next) {
+        if (!strcmp(p->name, name)) {
             free(name);
             free(value);
             return 0;
         }
     }
-    while(p->next){
-        if(!strcmp(p->name, name)){
+    while (p->next) {
+        if (!strcmp(p->name, name)) {
             free(name);
             free(value);
             return 0;
         }
         p = p->next;
     }
-    if(!strcmp(p->name, name)){
+    if (!strcmp(p->name, name)) {
         free(name);
         free(value);
         return 0;
     }
     element = initRuleList(name, value);
-    if(!element)
+    if (!element) {
         return 1;
+    }
     p->next = element;
     return 0;
 
@@ -175,11 +189,13 @@ int addRuleParent(RuleList **rl, char *line){
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int delRule(RuleList **rl){
+int delRule(RuleList** rl)
+{
 
-    RuleList *tmp;
-    if(!rl)
+    RuleList* tmp;
+    if (!rl) {
         return 1;
+    }
     tmp = *rl;
     *rl = (*rl)->next;
     free(tmp->name);
@@ -194,13 +210,16 @@ int delRule(RuleList **rl){
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int delRuleList(RuleList **rl){
+int delRuleList(RuleList** rl)
+{
 
-    if(!rl)
+    if (!rl) {
         return 1;
-    while(*rl){
-        if(delRule(rl))
+    }
+    while (*rl) {
+        if (delRule(rl)) {
             return 1;
+        }
     }
     return 0;
 
@@ -209,13 +228,15 @@ int delRuleList(RuleList **rl){
 /*** Shows a RuleList on the command prompt ***/
 /** Param **/
 /* RuleList *rl : RuleList list to print */
-void showRuleList(RuleList *rl){
+void showRuleList(RuleList* rl)
+{
 
-    RuleList *p;
-    if(!rl)
+    RuleList* p;
+    if (!rl) {
         return;
+    }
     p = rl;
-    while(p){
+    while (p) {
         printf("- %s=%u\n", p->name, p->value); // - ruleName=valueRule
         p = p->next;
     }
@@ -230,12 +251,14 @@ void showRuleList(RuleList *rl){
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int setNameValue(char *line, char *name, char *value){
+int setNameValue(char* line, char* name, char* value)
+{
 
-    char *index;
-    char *index2;
-    if(!line || !name || !value)
+    char* index;
+    char* index2;
+    if (!line || !name || !value) {
         return 1;
+    }
 // looking for the name of the rule
     index = strchr(line, ' ');
     index++;

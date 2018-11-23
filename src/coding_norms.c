@@ -16,22 +16,24 @@
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int bracketEOL(char *line){
-
+int bracketEOL(char* line)
+{
     int indexBracketLen;
-    char *indexBracket;
-    if(!line)
+    char* indexBracket;
+    if (!line) {
         return 1;
+    }
     indexBracket = strpbrk(line, "{}");
     // Check if there is a bracket in the line
-    if(!indexBracket)
+    if (!indexBracket) {
         return 0;
+    }
     indexBracketLen = strlen(indexBracket);
     // Check if the bracket is at EOL or before '\n'
-    if(indexBracketLen == 1 || indexBracketLen == 2)
+    if (indexBracketLen == 1 || indexBracketLen == 2) {
         return 0;
+    }
     return 1;
-
 }
 
 /*** Check if there are quotes in the line ***/
@@ -42,28 +44,27 @@ int bracketEOL(char *line){
    0 : Success
    int *indexQuoteBegin
    int *indexQuoteEnd */
-int checkQuote(char *line, int *indexQuoteBegin, int *indexQuoteEnd){
-
-    char *quoteBegin;
-    char *quoteEnd;
-    if(!line)
+int checkQuote(char* line, int* indexQuoteBegin, int* indexQuoteEnd)
+{
+    char* quoteBegin;
+    char* quoteEnd;
+    if (!line) {
         return 1;
-    if((quoteBegin = strchr(line, '"'))){
-        if((quoteEnd = strchr(quoteBegin, '"'))){
+    }
+    if ((quoteBegin = strchr(line, '"'))) {
+        if ((quoteEnd = strchr(quoteBegin, '"'))) {
             *indexQuoteBegin = strlen(line) - strlen(quoteBegin);
             *indexQuoteEnd = strlen(line) - strlen(quoteEnd);
             return 0;
         }
-    }
-    else if((quoteBegin = strchr(line, '\''))){
-        if((quoteEnd = strchr(line, '\''))){
+    } else if ((quoteBegin = strchr(line, '\''))) {
+        if ((quoteEnd = strchr(line, '\''))) {
             *indexQuoteBegin = strlen(line) - strlen(quoteBegin);
             *indexQuoteEnd = strlen(line) - strlen(quoteEnd);
             return 0;
         }
     }
     return 1;
-
 }
 
 /*** Check if there are spaces before and after a binary operator ***/
@@ -72,59 +73,60 @@ int checkQuote(char *line, int *indexQuoteBegin, int *indexQuoteEnd){
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int operatorsSpacing(char *line){
-
-    char *operatorIndex;
-    char *operators = "+-*/%=!&|<>^~";
-    if(!line)
+int operatorsSpacing(char* line)
+{
+    char* operatorIndex;
+    char* operators = "+-*/%=!&|<>^~";
+    if (!line) {
         return 1;
+    }
     // Parsing the line
     operatorIndex = line;
-    while((operatorIndex = strpbrk(operatorIndex, operators))){
+    while ((operatorIndex = strpbrk(operatorIndex, operators))) {
         // Check ++ and --
-        if(*operatorIndex == '+' || *operatorIndex == '-'){
-            if(*(operatorIndex + 1) == *operatorIndex){
+        if (*operatorIndex == '+' || *operatorIndex == '-') {
+            if (*(operatorIndex + 1) == *operatorIndex) {
                 operatorIndex += 2 * sizeof(char);
                 continue;
             }
         }
         // Check if there is a space before
-        if(line[strlen(line) - strlen(operatorIndex) - 1] != ' ')
+        if (line[strlen(line) - strlen(operatorIndex) - 1] != ' ') {
             return 1;
+        }
         // Check space after
-        if(*(operatorIndex + 1) == ' ' && *operatorIndex != '!'){
+        if (*(operatorIndex + 1) == ' ' && *operatorIndex != '!') {
             operatorIndex += sizeof(char);
             continue;
         }
         // If an '=' is after the operator, check the space after
-        if(*(operatorIndex + 1) == '=' && *(operatorIndex + 2) == ' '){
+        if (*(operatorIndex + 1) == '=' && *(operatorIndex + 2) == ' ') {
             operatorIndex += 2 * sizeof(char);
             continue;
         }
         // Check case <<, >>, &&, ||
-        if(*operatorIndex == '<' || *operatorIndex == '>' || *operatorIndex == '&' || *operatorIndex == '|'){
-            if(*(operatorIndex + 1) == *operatorIndex &&
-               *(operatorIndex + 2) == ' '){
+        if (*operatorIndex == '<' || *operatorIndex == '>' || *operatorIndex == '&' || *operatorIndex == '|') {
+            if (*(operatorIndex + 1) == *operatorIndex &&
+                *(operatorIndex + 2) == ' ') {
                 operatorIndex += 3 * sizeof(char);
                 continue;
             }
         }
         //check case >>= and <<=
-        if((*operatorIndex == '<' || *operatorIndex == '>') &&
-           *(operatorIndex + 1) == *operatorIndex &&
-           *(operatorIndex + 2) == '=' &&
-           *(operatorIndex + 3) == ' '){
+        if ((*operatorIndex == '<' || *operatorIndex == '>') &&
+            *(operatorIndex + 1) == *operatorIndex &&
+            *(operatorIndex + 2) == '=' &&
+            *(operatorIndex + 3) == ' ') {
             operatorIndex += 4 * sizeof(char);
             continue;
         }
-        if(*operatorIndex == '!'){
+        if (*operatorIndex == '!') {
             operatorIndex += sizeof(char);
             continue;
         }
         return 1;
     }
     return 0;
-
 }
 
 /*** Check if there's a space after a comma ***/
@@ -133,19 +135,20 @@ int operatorsSpacing(char *line){
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int commaSpacing(char *line){
-
-    char *indexComma;
-    if(!line)
+int commaSpacing(char* line)
+{
+    char* indexComma;
+    if (!line) {
         return 1;
+    }
     indexComma = line;
-    while((indexComma = strchr(indexComma, ','))){
-        if(*(indexComma + 1) != ' ')
+    while ((indexComma = strchr(indexComma, ','))) {
+        if (*(indexComma + 1) != ' ') {
             return 1;
+        }
         indexComma += sizeof(char);
     }
     return 0;
-
 }
 
 /*** Check if the indentation is correct ***/
@@ -156,24 +159,26 @@ int commaSpacing(char *line){
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int indent(char *line, int n, int i){
-
+int indent(char* line, int n, int i)
+{
     int countI;
     int countN;
     int countLine = 0;
-    if(!line || n <= 0 || i <= 0)
+    if (!line || n <= 0 || i <= 0) {
         return 1;
-    for(countI = 0; countI < i; countI++){
-        for(countN = 0; countN < n; countN++){
-            if(line[countLine] != ' ')
+    }
+    for (countI = 0; countI < i; countI++) {
+        for (countN = 0; countN < n; countN++) {
+            if (line[countLine] != ' ') {
                 return 1;
+            }
             countLine++;
         }
     }
-    if(line[countLine] == ' ')
+    if (line[countLine] == ' ') {
         return 1;
+    }
     return 0;
-
 }
 
 /*** Check comment header ***/
@@ -182,23 +187,27 @@ int indent(char *line, int n, int i){
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int commentsHeader(FILE *f){
-
+int commentsHeader(FILE* f)
+{
     char line[MAX_LINE];
-    if(!f)
+    if (!f) {
         return 1;
-    if(fseek(f, 0, SEEK_SET))
+    }
+    if (fseek(f, 0, SEEK_SET)) {
         return 1;
-    if(!fgets(line, MAX_LINE, f))
+    }
+    if (!fgets(line, MAX_LINE, f)) {
         return 1;
-    if(line[0] != '/' || line[1] != '*')
+    }
+    if (line[0] != '/' || line[1] != '*') {
         return 1;
-    while(fgets(line, MAX_LINE, f)){
-        if(strstr(line, "*/"))
+    }
+    while (fgets(line, MAX_LINE, f)) {
+        if (strstr(line, "*/")) {
             return 0;
+        }
     }
     return 1;
-
 }
 
 /*** Check the number of characters in a line ***/
@@ -208,14 +217,15 @@ int commentsHeader(FILE *f){
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int maxLineNumbers(char *line, int n){
-
-    if(!line || n <= 0)
+int maxLineNumbers(char* line, int n)
+{
+    if (!line || n <= 0) {
         return 1;
-    if(strlen(line) > n)
+    }
+    if (strlen(line) > n) {
         return 1;
+    }
     return 0;
-
 }
 
 /*** Check the number of lines in a file ***/
@@ -225,14 +235,15 @@ int maxLineNumbers(char *line, int n){
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int maxFileLineNumbers(int lines, int n){
-
-    if(lines <= 0 || n <= 0)
+int maxFileLineNumbers(int lines, int n)
+{
+    if (lines <= 0 || n <= 0) {
         return 1;
-    if(lines > n)
+    }
+    if (lines > n) {
         return 1;
+    }
     return 0;
-
 }
 
 /*** Check trailing spaces ***/
@@ -241,12 +252,13 @@ int maxFileLineNumbers(int lines, int n){
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int noTrailingSpaces(char *line){
-
-    if(!line)
+int noTrailingSpaces(char* line)
+{
+    if (!line) {
         return 1;
-    if(line[strlen(line) - 2] == ' ')
+    }
+    if (line[strlen(line) - 2] == ' ') {
         return 1;
+    }
     return 0;
-
 }

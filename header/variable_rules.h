@@ -15,5 +15,4 @@
 #include <stdlib.h>
 
 
-
 #endif // VARIABLE_RULE_H

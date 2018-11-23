@@ -17,65 +17,70 @@
 /*** String linked list for filenames ***/
 /** char *name : filename
     struct fileList *next : ptr for the next element of the list **/
-typedef struct fileList{
+typedef struct fileList
+{
 
-    char *name;
-    struct fileList *next;
+    char* name;
+    struct fileList* next;
 
-}FileList;
+} FileList;
 
 /*** Linked list for the rules ***/
 /** char *name : name of the rule
     unsigned int value : value of the rule
     struct ruleList *next : ptr for the next element of the list **/
-typedef struct ruleList{
+typedef struct ruleList
+{
 
-    char *name;
+    char* name;
     unsigned int value;
-    struct ruleList *next;
+    struct ruleList* next;
 
-}RuleList;
+} RuleList;
 
 /*** Data structure to access the data obtained through the .lconf files ***/
 /** FileList *extends : Linked list of .lconf filenames
     RuleList *rules : Linked list of rules
     FileList *filesExcluded : Linked list of filenames which are excluded from the parsing
     unsigned char recursive : if the parsing is recursive or not **/
-typedef struct config{
+typedef struct config
+{
 
-    FileList *extends;
-    RuleList *rules;
-    FileList *filesExcluded;
+    FileList* extends;
+    RuleList* rules;
+    FileList* filesExcluded;
     unsigned char recursive;
 
-}Config;
+} Config;
 
 /*** Data structure to list errors in files ***/
 /** unsigned int line : line number of the error
     char *errorname : name of the rule
     char *filename : name of the file
     struct error *next : pointer to the next error **/
-typedef struct error{
+typedef struct error
+{
 
     unsigned int line;
-    char *errorName;
-    char *filename;
-    struct error *next;
+    char* errorName;
+    char* filename;
+    struct error* next;
 
-}Error;
+} Error;
 
 /*** Data structure to list variables declared in files ***/
 /** char *type : type of the variable
     char *name : name of the variable
     unsigned char used : boolean to check if the variable is used or not
     struct variables *next : pointer to the next variable **/
-typedef struct variables{
+typedef struct variables
+{
 
-    char *type;
-    char *name;
+    char* type;
+    char* name;
     unsigned char used;
-    struct variables *next;
+    struct variables* next;
 
-}Variables;
+} Variables;
 
 #endif // STRUCT_H

@@ -18,15 +18,16 @@
 #include "rule_list.h"
 #include "config.h"
 
+
 #define KEY 4
 #define KEY_LEN 255
 #define LINE 2555
 
-FILE* openLconf(char *path);
+FILE* openLconf(char* path);
 Config* getKey(FILE*);
-int fillConf(char *line, char *key, Config *conf, unsigned char parent);
-int checkKey(char *key);
-void getParentLconf(Config *conf);
-int parseParent(char *filename, Config *conf);
+int fillConf(char* line, char* key, Config* conf, unsigned char parent);
+int checkKey(char* key);
+void getParentLconf(Config* conf);
+int parseParent(char* filename, Config* conf);
 
 #endif // FILE_H

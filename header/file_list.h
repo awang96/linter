@@ -16,10 +16,11 @@
 #include "struct.h"
 #include <string.h>
 
-FileList *initFileList(char *name);
-int addFile(FileList **fl, char *name);
-int delFile(FileList **fl);
-int delFileList(FileList **fl);
-void showFileList(FileList *fl);
+
+FileList* initFileList(char* name);
+int addFile(FileList** fl, char* name);
+int delFile(FileList** fl);
+int delFileList(FileList** fl);
+void showFileList(FileList* fl);
 
 #endif // FILE_LIST_H

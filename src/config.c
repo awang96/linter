@@ -18,19 +18,22 @@
    char *rec          : if the parsing is recursive or not */
 /** Return **/
 /* Config* : Linter's options after parsing a .lconf file */
-Config* initConfig(FileList *extends, RuleList *rules, FileList *excluded, char *rec){
+Config* initConfig(FileList* extends, RuleList* rules, FileList* excluded, char* rec)
+{
 
-    Config *conf;
+    Config* conf;
     conf = malloc(sizeof(Config));
-    if(!conf)
+    if (!conf) {
         return NULL;
+    }
     conf->extends = extends;
     conf->rules = rules;
     conf->filesExcluded = excluded;
-    if(!strcmp(rec, "true"))
+    if (!strcmp(rec, "true")) {
         conf->recursive = 1;
-    else
+    } else {
         conf->recursive = 0;
+    }
     return conf;
 
 }
@@ -41,16 +44,21 @@ Config* initConfig(FileList *extends, RuleList *rules, FileList *excluded, char 
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int delConfig(Config **config){
+int delConfig(Config** config)
+{
 
-    if(!config)
+    if (!config) {
         return 1;
-    if(delFileList(&((*config)->extends)))
+    }
+    if (delFileList(&((*config)->extends))) {
         return 1;
-    if(delFileList(&((*config)->filesExcluded)))
+    }
+    if (delFileList(&((*config)->filesExcluded))) {
         return 1;
-    if(delRuleList(&((*config)->rules)))
+    }
+    if (delRuleList(&((*config)->rules))) {
         return 1;
+    }
     free(*config);
     return 0;
 

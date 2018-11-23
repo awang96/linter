@@ -14,21 +14,24 @@
 /** Params **/
 /* char *type : type of the variable
    char *name*/
-Variables *initVariables(char *type, char *name){
+Variables* initVariables(char* type, char* name)
+{
 
-    Variables *element;
-    if(!type || !name)
+    Variables* element;
+    if (!type || !name) {
         return NULL;
+    }
     element = malloc(sizeof(Variables));
-    if(!element)
+    if (!element) {
         return NULL;
+    }
     element->type = malloc(sizeof(char) * strlen(type));
-    if(!element->type){
+    if (!element->type) {
         free(element);
         return NULL;
     }
     element->name = malloc(sizeof(char) * strlen(name));
-    if(!element->name){
+    if (!element->name) {
         free(element->type);
         free(element);
         return NULL;
@@ -48,23 +51,28 @@ Variables *initVariables(char *type, char *name){
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int addVariable(Variables **variableList, char *name, char *type){
+int addVariable(Variables** variableList, char* name, char* type)
+{
 
-    Variables *p;
-    if(!variableList || !name || !type)
+    Variables* p;
+    if (!variableList || !name || !type) {
         return 1;
+    }
     p = *variableList;
-    if(!p){
+    if (!p) {
         *variableList = initVariables(type, name);
-        if(!variableList)
+        if (!variableList) {
             return 1;
+        }
         return 0;
     }
-    while(p->next)
+    while (p->next) {
         p = p->next;
+    }
     p->next = initVariables(type, name);
-    if(!p->next)
+    if (!p->next) {
         return 1;
+    }
     return 0;
 
 }
@@ -75,11 +83,13 @@ int addVariable(Variables **variableList, char *name, char *type){
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int delVariable(Variables **variableList){
+int delVariable(Variables** variableList)
+{
 
-    Variables *p;
-    if(!variableList)
+    Variables* p;
+    if (!variableList) {
         return 1;
+    }
     p = *variableList;
     *variableList = (*variableList)->next;
     free(p->name);
@@ -95,13 +105,16 @@ int delVariable(Variables **variableList){
 /** Return **/
 /* 0 : Success
    1 : Failure */
-int delVariableList(Variables **variableList){
+int delVariableList(Variables** variableList)
+{
 
-    if(!variableList)
+    if (!variableList) {
         return 1;
-    while(*variableList){
-        if(delVariable(variableList))
+    }
+    while (*variableList) {
+        if (delVariable(variableList)) {
             return 1;
+        }
     }
     return 0;
 

@@ -18,4 +18,5 @@
 #include "coding_norms.h"
 #include "rules.h"
 
+
 #endif // MAIN_H

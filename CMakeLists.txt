@@ -16,6 +16,9 @@ add_library(rule_list header/rule_list.h src/rule_list.c)
 add_library(variable_rules header/variable_rules.h src/variable_rules.c)
 add_library(variables header/variables.h src/variables.c)
 
+
+target_link_libraries(rules coding_norms)
+
 add_executable(linter src/main.c header/struct.h)
 target_link_libraries(
         linter

@@ -17,7 +17,8 @@
 #include "rule_list.h"
 #include "file_list.h"
 
-Config* initConfig(FileList *extends, RuleList *rules, FileList *excluded, char *rec);
-int delConfig(Config **config);
+
+Config* initConfig(FileList* extends, RuleList* rules, FileList* excluded, char* rec);
+int delConfig(Config** config);
 
 #endif // CONFIG_H

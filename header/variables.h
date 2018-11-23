@@ -16,6 +16,7 @@
 #include <string.h>
 #include "struct.h"
 
-Variables *initVariables(char *type, char *name);
+
+Variables* initVariables(char* type, char* name);
 
 #endif // VARIABLES_H
