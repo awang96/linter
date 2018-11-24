@@ -7,7 +7,7 @@ cmake ..
 make
 ```
 
-You directly use the `CMakeLists.txt` file with Intellij CLion.
+You can directly import the project into [CLion][clion] using the `CMakeLists.txt` file.
 
 # Codeblocks
 
@@ -22,4 +22,8 @@ cmake .. -G "CodeBlocks - MinGW Makefiles"
 And open the generated `.cbp`.
 
 
-If using the included `.cpb`, be careful not to commit absolute paths.
+If using the included `.cpb`, be careful not to commit absolute paths, 
+Codeblocks has that nasty habit of doing that.
+
+
+[clion]: https://www.jetbrains.com/clion/
