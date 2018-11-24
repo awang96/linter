@@ -15,6 +15,7 @@ unknown_function/* weird comment */() {
 }
 
 int good_global = /* weird comment */ 0;
+int/* problematic comment */problem = 0;
 
 int good_function() {
     return 0;

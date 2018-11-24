@@ -7,11 +7,7 @@
 
 static char* should_remove_comments_from_string()
 {
-    char* program = "/**\n"
-                    " * A top comment\n"
-                    " */\n"
-                    "\n"
-                    "// inline comment\n"
+    char* program = "// inline comment\n"
                     "unknown_variable /* weird comment */ = 7; // inline comment\n"
                     "\n"
                     "/**\n"
@@ -24,11 +20,13 @@ static char* should_remove_comments_from_string()
                     "}\n"
                     "\n"
                     "int good_global = /* weird comment */ 0;\n"
+                    "int/* weird comment */problem = 0;\n"
                     "\n"
                     "int good_function() {\n"
                     "    return /*comment*/ 0;\n"
                     "}";
     char* woComments = removeComments(program);
+    printf("___\n%s\n___\n", woComments);
     mu_assert("there should not be any '/*' (1)", strstr(woComments, "/*") == NULL);
     mu_assert("there should not be any '*/' (2)", strstr(woComments, "*/") == NULL);
     mu_assert("there should not be any '//' (3)", strstr(woComments, "//") == NULL);
