@@ -3,33 +3,19 @@
 
 #include "minunit.h"
 #include "strings.h"
+#include "file_helper.h"
 
 
 static char* should_remove_comments_from_string()
 {
-    char* program = "// inline comment\n"
-                    "unknown_variable /* weird comment */ = 7; // inline comment\n"
-                    "\n"
-                    "/**\n"
-                    " * Comment above function\n"
-                    " * a bit longer\n"
-                    " * @return\n"
-                    " */\n"
-                    "unknown_function/* weird comment */() {\n"
-                    "    /* weird comment */return;\n"
-                    "}\n"
-                    "\n"
-                    "int good_global = /* weird comment */ 0;\n"
-                    "int/* weird comment */problem = 0;\n"
-                    "\n"
-                    "int good_function() {\n"
-                    "    return /*comment*/ 0;\n"
-                    "}";
+    char* program;
+    size_t size = readFileToBuffer("../resources/bad_source.c", &program);
     char* woComments = removeComments(program);
-    printf("___\n%s\n___\n", woComments);
     mu_assert("there should not be any '/*' (1)", strstr(woComments, "/*") == NULL);
     mu_assert("there should not be any '*/' (2)", strstr(woComments, "*/") == NULL);
     mu_assert("there should not be any '//' (3)", strstr(woComments, "//") == NULL);
+    printf("File size : %lu\n", size);
+    mu_assert("file size should be 6678, or be updated (4)", size == 6678);
     return 0;
 }
 

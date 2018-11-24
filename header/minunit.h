@@ -22,7 +22,7 @@
     { \
         char* result = tests(); \
         if (result != 0) { \
-            fprintf(stderr, "error, %s\n", result); \
+            fprintf(stderr, "Error, %s\n", result); \
         } else { \
             printf("All tests passed\n"); \
         } \

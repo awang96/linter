@@ -41,6 +41,9 @@ add_library(variable_rules header/variable_rules.h src/variable_rules.c)
 # variables
 add_library(variables header/variables.h src/variables.c)
 
+# file helpers
+add_library(file_helpers src/file_helper.c header/file_helper.h)
+
 
 add_executable(linter src/main.c header/struct.h)
 target_link_libraries(
@@ -52,4 +55,4 @@ target_link_libraries(
 )
 
 add_executable(tests_strings tests/tests_strings.c)
-target_link_libraries(tests_strings strings)
+target_link_libraries(tests_strings strings file_helpers)

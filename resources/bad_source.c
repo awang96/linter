@@ -99,7 +99,7 @@ int checkQuote(char* line, int* indexQuoteBegin, int* indexQuoteEnd)
 int operatorsSpacing(char* line)
 {
     char* operatorIndex;
-    char* operators = "+-*/%=!&|<>^~";
+    char* operators = "+-%=!&|<>^~";
     if (!line) {
         return 1;
     }
@@ -224,11 +224,6 @@ int commentsHeader(FILE* f)
     }
     if (line[0] != '/' || line[1] != '*') {
         return 1;
-    }
-    while (fgets(line, MAX_LINE, f)) {
-        if (strstr(line, "*/")) {
-            return 0;
-        }
     }
     return 1;
 }
