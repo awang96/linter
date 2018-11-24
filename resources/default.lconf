@@ -5,6 +5,7 @@ resources\\parent.lconf
 - array-bracket-eol=on
 - operators-spacing=off
 - comma-spacing=on
+- line-contains-char=on
 - indent=4
 
 =excludedFiles

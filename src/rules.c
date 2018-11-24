@@ -43,6 +43,11 @@ void loopRulesOnLine(RuleList* rules, char* line)
 {
     RuleList* mut = rules;
     while (mut) {
+        if (!strcmp(mut->name, "line-contains-char") && mut->value) {
+            if (strstr(line, "char")) {
+                fprintf(stderr, "  ^ this line contains 'char'\n");
+            }
+        }
         if (!strcmp(mut->name, "operators-spacing") && mut->value) {
             if (!operatorsSpacing(line)) { continue; }
             fprintf(stderr, " ^ operators spacing\n");
