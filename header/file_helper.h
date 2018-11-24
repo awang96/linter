@@ -14,4 +14,12 @@
  */
 size_t readFileToBuffer(char* file, char** buffer);
 
+/**
+ * Reads a file into an array of char directly
+ * without any comments
+ * @param file path
+ * @return
+ */
+char* readSourceFileToBufferWithoutComments(char* file);
+
 #endif //LINTER_FILE_H

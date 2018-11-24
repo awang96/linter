@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "file_helper.h"
+#include "strings.h"
 
 
 size_t readFileToBuffer(char* file, char** buffer)
@@ -34,4 +35,12 @@ size_t readFileToBuffer(char* file, char** buffer)
         return 0;
     }
     return size;
+}
+
+
+char* readSourceFileToBufferWithoutComments(char* file)
+{
+    char* text;
+    readFileToBuffer(file, &text);
+    return removeComments(text);
 }

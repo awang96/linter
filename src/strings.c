@@ -12,6 +12,9 @@ char* appendOneChar(char* str, char c);
 
 char* removeComments(char* prgm)
 {
+    if (!prgm) {
+        return NULL;
+    }
     size_t n = strlen(prgm);
     char* res = calloc(n, sizeof(char));
 
