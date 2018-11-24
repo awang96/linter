@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     showFileList(c->filesExcluded);
     printf("\n=recursive\n%d\n", c->recursive);
     fclose(conf);
-    conf = fopen("src/coding_norms.c", "r");
+    conf = fopen("resources/bad_source.c", "r");
     if (!conf) {
         fprintf(stderr, "couldn't open file");
         return EXIT_FAILURE;

@@ -8,8 +8,8 @@
 #ifndef RULE_H
 #define RULE_H
 
-int applyRules(RuleList* r, FILE* f);
-void loopRulesOnLine(RuleList* rule, char* line);
+int applyRules(RuleList* rule, FILE* f);
+void loopRulesOnLine(RuleList* mutableru, char* line);
 char* removeComment(char* line, int* comment);
 
 #endif // RULE_H

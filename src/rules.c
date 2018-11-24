@@ -12,19 +12,18 @@
 #include "coding_norms.h"
 
 
-int applyRules(RuleList* r, FILE* f)
+int applyRules(RuleList* rule, FILE* f)
 {
     char line[200];
     int nb_line = 0;
     char* lineWoComment;
     int comment = 0;
 
-    if (!r) {
+    if (!rule) {
         return 1;
     }
-    RuleList* p;
+
     while (fgets(line, 200, f)) {
-        p = r;
         nb_line += 1;
 
         if ((lineWoComment = removeComment(line, &comment)) == NULL) {
@@ -33,34 +32,35 @@ int applyRules(RuleList* r, FILE* f)
         }
 
         printf("%03d | %s", nb_line, lineWoComment);
-        loopRulesOnLine(p, line);
+        loopRulesOnLine(rule, line);
     }
 
     return 0;
 }
 
 
-void loopRulesOnLine(RuleList* rule, char* line)
+void loopRulesOnLine(RuleList* rules, char* line)
 {
-    while (rule) {
-        if (!strcmp(rule->name, "operators-spacing") && rule->value) {
+    RuleList* mut = rules;
+    while (mut) {
+        if (!strcmp(mut->name, "operators-spacing") && mut->value) {
             if (!operatorsSpacing(line)) { continue; }
             fprintf(stderr, " ^ operators spacing\n");
         }
-        if (!strcmp(rule->name, "array-bracket-eol") && rule->value) {
+        if (!strcmp(mut->name, "array-bracket-eol") && mut->value) {
             // arrayBracketEol(value);
             // printf("ok %s", line);
         }
-        if (!strcmp(rule->name, "operators-spacing") && rule->value) {
+        if (!strcmp(mut->name, "operators-spacing") && mut->value) {
             //operatorsSpacing(value);
         }
-        if (!strcmp(rule->name, "comma-spacing") && rule->value) {
+        if (!strcmp(mut->name, "comma-spacing") && mut->value) {
             //commaSpacing(value);
         }
-        if (!strcmp(rule->name, "indent") && rule->value) {
+        if (!strcmp(mut->name, "indent") && mut->value) {
             //indent(value);
         }
-        rule = rule->next;
+        mut = mut->next;
     }
 }
 
