@@ -41,6 +41,8 @@ add_library(variable_rules header/variable_rules.h src/variable_rules.c)
 # variables
 add_library(variables header/variables.h src/variables.c)
 
+add_library(tokenizer src/tokenizer.c header/tokenizer.h)
+
 
 add_executable(linter src/main.c header/struct.h)
 target_link_libraries(
@@ -53,3 +55,6 @@ target_link_libraries(
 
 add_executable(tests_strings tests/tests_strings.c)
 target_link_libraries(tests_strings strings)
+
+add_executable(tests_tokenizer tests/tests_tokenizer.c)
+target_link_libraries(tests_tokenizer tokenizer)

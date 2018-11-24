@@ -7,7 +7,7 @@
 #include "strings.h"
 
 
-void appendToChars(char* res, char* i);
+char* appendOneChar(char* str, char c);
 
 
 char* removeComments(char* prgm)
@@ -15,7 +15,7 @@ char* removeComments(char* prgm)
     size_t n = strlen(prgm);
     char* res = calloc(n, sizeof(char));
 
-    // Flags to indicate that single line and multpile line comments
+    // Flags to indicate that single line and multiple line comments
     // have started or not.
     bool s_cmt = false;
     bool m_cmt = false;
@@ -32,7 +32,7 @@ char* removeComments(char* prgm)
             // If this character is in a comment, ignore it
         } else if (s_cmt || m_cmt) {
             continue;
-            // Check for beginning of comments and set the approproate flags
+            // Check for beginning of comments and set the appropriate flags
         } else if (prgm[i] == '/' && prgm[i + 1] == '/') {
             s_cmt = true;
             i += 1;
@@ -41,7 +41,7 @@ char* removeComments(char* prgm)
             i += 1;
             // If current character is a non-comment character, append it to res
         } else {
-            appendToChars(res, &prgm[i]);
+            res = appendOneChar(res, prgm[i]);
         }
     }
 
@@ -49,7 +49,32 @@ char* removeComments(char* prgm)
 }
 
 
-void appendToChars(char* res, char* i)
+char* appendOneChar(char* str, char c)
 {
-    sprintf(res, "%s%s", res, i);
+    size_t len = strlen(str);
+    char* result = calloc(len + 2, sizeof(char));
+    strcpy(result, str);
+    result[len] = c;
+    free(str);
+    return result;
+}
+
+
+char isWhitespace(char c)
+{
+    return c == ' ' ||
+        c == '\n' ||
+        c == '\r' ||
+        c == '\t' ||
+        c == '\v' ||
+        c == '\f';
+}
+
+
+char isAlphanumeric(char c)
+{
+    return (c >= 'A' && c <= 'Z') ||
+        (c >= 'a' && c <= 'z') ||
+        (c >= '0' && c <= '9') ||
+        c == '_';
 }
