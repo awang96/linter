@@ -5,8 +5,11 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(header)
 
+# string helpers
+add_library(strings src/strings.c header/strings.h)
+
 # coding norms
-add_library(coding_norms header/coding_norms.h src/coding_norms.c)
+add_library(coding_norms header/coding_norms.h src/coding_norms.c tests/tests_strings.c)
 
 # coding rules
 add_library(coding_rules header/coding_rules.h src/coding_rules.c)
@@ -30,7 +33,7 @@ target_link_libraries(lconf config rule_list file_list)
 
 # rules
 add_library(rules header/rules.h src/rules.c)
-target_link_libraries(rules coding_norms)
+target_link_libraries(rules coding_norms strings)
 
 # variable rules
 add_library(variable_rules header/variable_rules.h src/variable_rules.c)
@@ -47,3 +50,6 @@ target_link_libraries(
         coding_norms
         rules
 )
+
+add_executable(tests_strings tests/tests_strings.c)
+target_link_libraries(tests_strings strings)
