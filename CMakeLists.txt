@@ -57,3 +57,6 @@ target_link_libraries(
 
 add_executable(tests_strings tests/tests_strings.c)
 target_link_libraries(tests_strings strings file_helpers)
+
+add_executable(tests_rules tests/tests_rules.c)
+target_link_libraries(tests_rules rules)
