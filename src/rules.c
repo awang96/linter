@@ -14,6 +14,13 @@
 #include "coding_norms.h"
 
 
+#ifdef _WIN32
+#define LINE_SEP "\n\r"
+#else
+#define LINE_SEP "\n"
+#endif
+
+
 int applyRules(RuleList* rule, FILE* f)
 {
     char line[200];
@@ -36,6 +43,27 @@ int applyRules(RuleList* rule, FILE* f)
         printf("%03d | %s", nb_line, lineWoComment);
         loopRulesOnLine(rule, line);
     }
+
+    return 0;
+}
+
+
+int applyRulesBuffer(RuleList* rule, char* source)
+{
+    if (!rule || !source) {
+        return 1;
+    }
+    int nb_line = 0;
+    // strdup to avoid mutating the original source
+    char* dup = strdup(source);
+    char* line = strtok(dup, LINE_SEP);
+    while (line) {
+        nb_line += 1;
+        printf("%03d | %s\n", nb_line, line);
+        loopRulesOnLine(rule, line);
+        line = strtok(NULL, LINE_SEP);
+    }
+    free(dup);
 
     return 0;
 }

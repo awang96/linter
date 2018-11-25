@@ -15,23 +15,17 @@
 #include "config.h"
 #include "coding_norms.h"
 #include "rules.h"
+#include "file_helper.h"
 
-/*** Main ***/
-/** Params **/
-/* argv[1] : char*, path to the .lconf file */
-int main(int argc, char** argv)
+
+Config* getConfig(char* file)
 {
-    FILE* conf;
-    Config* c;
-    if (argc < 1) {
-        return EXIT_FAILURE;
-    }
-    conf = openLconf(argv[1]);
+    FILE* conf = openLconf(file);
     if (!conf) {
-        printf("Open failed\n");
-        return EXIT_FAILURE;
+        fprintf(stderr, "Open failed\n");
+        return NULL;
     }
-    c = getKey(conf);
+    Config* c = getKey(conf);
     printf("=extends\n");
     showFileList(c->extends);
     printf("\n=rules\n");
@@ -40,18 +34,22 @@ int main(int argc, char** argv)
     showFileList(c->filesExcluded);
     printf("\n=recursive\n%d\n", c->recursive);
     fclose(conf);
-    conf = fopen("resources/bad_source.c", "r");
-    if (!conf) {
-        fprintf(stderr, "couldn't open file");
+    return c;
+}
+
+
+/*** Main ***/
+/** Params **/
+/* argv[1] : char*, path to the .lconf file */
+int main(int argc, char** argv)
+{
+    if (argc < 1) {
         return EXIT_FAILURE;
     }
-    // if (!commentsHeader(conf)) {
-    //     printf("OK\n");
-    // } else {
-    //     printf("KO\n");
-    // }
-    applyRules(c->rules, conf);
-    fclose(conf);
+    Config* c = getConfig(argv[1]);
+    char* source = readSourceFileToBufferWithoutComments("resources/bad_source.c");
+    applyRulesBuffer(c->rules, source);
+    free(source);
     delConfig(&c);
     return EXIT_SUCCESS;
 }

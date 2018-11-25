@@ -11,6 +11,7 @@
 #define RULE_H
 
 int applyRules(RuleList* rule, FILE* f);
+int applyRulesBuffer(RuleList* rule, char* source);
 void loopRulesOnLine(RuleList* rules, char* line);
 char* removeComment(char* line, int* comment);
 bool isValidVariableDeclaration(char*);

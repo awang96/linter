@@ -53,6 +53,7 @@ target_link_libraries(
         config
         coding_norms
         rules
+        file_helpers
 )
 
 add_executable(tests_strings tests/tests_strings.c)
