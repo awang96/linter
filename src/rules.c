@@ -8,6 +8,8 @@
 ** Description : Apply rules
 */
 
+#include <rules.h>
+
 #include "rules.h"
 #include "coding_norms.h"
 
@@ -112,4 +114,16 @@ char* removeComment(char* line, int* comment)
     }
 
     return line;
+}
+
+
+bool isValidVariableDeclaration(char* s)
+{
+    return true;
+}
+
+
+bool isValidPrototypeDeclaration(char* s)
+{
+    return true;
 }
