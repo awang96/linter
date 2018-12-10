@@ -1,7 +1,21 @@
+/*
+** Filename : file_helper.h
+**
+** Made by : Alexandre WANG, Quentin FANECO, Jacques RIMBAULT
+**
+** Last edit : 2018/12/10
+**
+** Description : Header file for file_helper.h
+*/
+
 #ifndef LINTER_FILE_H
 #define LINTER_FILE_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+#include "strings.h"
 
 
 /**
@@ -21,5 +35,12 @@ size_t readFileToBuffer(char* file, char** buffer);
  * @return
  */
 char* readSourceFileToBufferWithoutComments(char* file);
+
+/**
+ * Recursive parsing of a directory
+ * @param dirName : path of the directory to parse
+ * @return
+*/
+void parseDir(char *dirName);
 
 #endif //LINTER_FILE_H

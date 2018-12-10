@@ -23,9 +23,7 @@ FileList* initFileList(char* name)
     if (!name) {
         return NULL;
     }
-    printf("a\n");
     element = malloc(sizeof(FileList));
-    printf("b\n");
     if (!element) {
         return NULL;
     }
