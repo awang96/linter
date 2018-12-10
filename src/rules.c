@@ -79,12 +79,13 @@ void loopRulesOnLine(RuleList* rules, char* line)
             }
         }
         if (!strcmp(mut->name, "operators-spacing") && mut->value) {
+            printf(" ok \n");
             if (!operatorsSpacing(line)) { continue; }
             fprintf(stderr, " ^ operators spacing\n");
         }
         if (!strcmp(mut->name, "array-bracket-eol") && mut->value) {
-            // arrayBracketEol(value);
-            // printf("ok %s", line);
+            if (bracketEOL(line))
+                printf(" ^ array-bracket-eol\n");
         }
         if (!strcmp(mut->name, "operators-spacing") && mut->value) {
             //operatorsSpacing(value);
@@ -94,6 +95,9 @@ void loopRulesOnLine(RuleList* rules, char* line)
         }
         if (!strcmp(mut->name, "indent") && mut->value) {
             //indent(value);
+        }
+        if (!strcmp(mut->name, "no-multi-declaration") && mut->value) {
+
         }
         mut = mut->next;
     }

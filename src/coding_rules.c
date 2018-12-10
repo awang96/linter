@@ -10,4 +10,11 @@
 
 #include "coding_rules.h"
 
+int noMultiDeclaration(char* line) {
+    /*char** primaryTypes = {"int", "char", "float", "long", "double", "short", "bool"};
 
+    for (int i )
+    if (strstr(line, ))*/
+
+    return 0;
+}

@@ -46,7 +46,7 @@ int bracketEOL(char* line)
     if (!line) {
         return 1;
     }
-    indexBracket = strpbrk(line, "{}");
+    indexBracket=strpbrk(line, "{}");
     // Check if there is a bracket in the line
     if (!indexBracket) {
         return 0;
