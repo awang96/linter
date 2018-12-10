@@ -22,6 +22,8 @@ int bracketEOL(char* line) {
     int failure = 0;
     char* substr;
 
+    if (!line) return 1;
+
     if ((substr = strchr(line, '{')) != NULL) {
         if (line[0] == '{') {
             return 1;
@@ -83,7 +85,6 @@ int operatorsSpacing(char* line)
     if (!line) {
         return 1;
     }
-    printf("ok");
     // Parsing the line
     operatorIndex = line;
     while ((operatorIndex = strpbrk(operatorIndex, operators))) {
@@ -147,6 +148,10 @@ int commaSpacing(char* line)
     }
     indexComma = line;
     while ((indexComma = strchr(indexComma, ','))) {
+        if (*(indexComma + 1) == '\'' && *(indexComma - 1) == '\'') {
+            indexComma += sizeof(char);
+            continue;
+        }
         if (*(indexComma + 1) != ' ') {
             return 1;
         }

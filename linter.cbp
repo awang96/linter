@@ -38,11 +38,13 @@
 		<Unit filename="header/coding_rules.h" />
 		<Unit filename="header/config.h" />
 		<Unit filename="header/error.h" />
+		<Unit filename="header/file_helper.h" />
 		<Unit filename="header/file_list.h" />
 		<Unit filename="header/lconf.h" />
 		<Unit filename="header/main.h" />
 		<Unit filename="header/rule_list.h" />
 		<Unit filename="header/rules.h" />
+		<Unit filename="header/strings.h" />
 		<Unit filename="header/struct.h" />
 		<Unit filename="header/variable_rules.h" />
 		<Unit filename="header/variables.h" />
@@ -58,6 +60,9 @@
 		<Unit filename="src/error.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/file_helper.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/file_list.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -71,6 +76,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/rules.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/strings.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/variable_rules.c">

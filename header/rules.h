@@ -10,9 +10,10 @@
 #ifndef RULE_H
 #define RULE_H
 
+int getNbIndents(char* line, int nb_indent);
 int applyRules(RuleList* rule, FILE* f);
 int applyRulesBuffer(RuleList* rule, char* source);
-void loopRulesOnLine(RuleList* rules, char* line);
+void loopRulesOnLine(RuleList* rules, char* line, int nb_indent);
 char* removeComment(char* line, int* comment);
 bool isValidVariableDeclaration(char*);
 bool isValidPrototypeDeclaration(char*);

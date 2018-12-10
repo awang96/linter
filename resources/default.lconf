@@ -2,7 +2,7 @@
 resources\\parent.lconf
 
 =rules
-- array-bracket-eol=on
+- array-bracket-eol=off
 - operators-spacing=off
 - comma-spacing=on
 - line-contains-char=on
