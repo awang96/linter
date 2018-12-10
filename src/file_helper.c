@@ -1,10 +1,16 @@
-
-#include <stdio.h>
-#include <stdlib.h>
+/*
+** Filename : file_helper.c
+**
+** Made by : Alexandre WANG, Quentin FANECO, Jacques RIMBAULT
+**
+** Last edit : 2018/12/10
+**
+** Description : Functions to read files
+*/
 
 #include "file_helper.h"
-#include "strings.h"
 
+#define DIR_NAME 5555
 
 size_t readFileToBuffer(char* file, char** buffer)
 {
@@ -43,4 +49,34 @@ char* readSourceFileToBufferWithoutComments(char* file)
     char* text;
     readFileToBuffer(file, &text);
     return removeComments(text);
+}
+
+void parseDir(char *dirName){
+
+    DIR *dir;
+    struct dirent *ent;
+    char nextDir[DIR_NAME];
+    char ext[3];
+    if((dir = opendir(dirName))){
+	// parsing dirName
+	while((ent = readdir(dir))){
+	    if(!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..")){
+		continue;
+	    }
+	    strcpy(ext, ent->d_name + strlen(ent->d_name) - 2);
+	    // if ent is a directory, call to parseDir
+	    if(ent->d_type == DT_DIR){
+		strcpy(nextDir, dirName);
+		strcat(nextDir, "/");
+		strcat(nextDir, ent->d_name);
+		parseDir(nextDir);
+	    }
+	    // if ent is a file, check extension
+	    else if(ent->d_type == DT_REG && (!strcmp(ext, ".c") || !strcmp(ext, ".h"))){
+		printf("%s\n", ent->d_name);
+	    }
+	}
+	closedir(dir);
+    }
+
 }

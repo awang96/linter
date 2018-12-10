@@ -43,12 +43,13 @@ Config* getConfig(char* file)
 /* argv[1] : char*, path to the .lconf file */
 int main(int argc, char** argv)
 {
-    if (argc < 1) {
+    if (argc < 2) {
         return EXIT_FAILURE;
     }
     Config* c = getConfig(argv[1]);
     char* source = readSourceFileToBufferWithoutComments("resources/bad_source.c");
     applyRulesBuffer(c->rules, source);
+    parseDir("/home/azerty/Documents/programmes/linter");
     free(source);
     delConfig(&c);
     return EXIT_SUCCESS;
