@@ -81,9 +81,8 @@ int applyRulesBuffer(RuleList* rule, char* source)
     int nb_indent = 1;
 
     while (line) {
-        printf("ok\n");
         nb_line += 1;
-        nb_indent = getNbIndents(line, nb_indent);
+        //nb_indent = getNbIndents(line, nb_indent);
         printf("%03d | %d | %s\n", nb_line, nb_indent, line);
         loopRulesOnLine(rule, line, nb_indent);
         line = strtok(NULL, LINE_SEP);
@@ -123,7 +122,9 @@ void loopRulesOnLine(RuleList* rules, char* line, int nb_indent)
             //indent(value);
         }
         if (!strcmp(mut->name, "no-multi-declaration") && mut->value) {
-
+            if (noMultiDeclaration(line)) {
+                printf(" ^ no-multi-declaration");
+            }
         }
         mut = mut->next;
     }
