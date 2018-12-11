@@ -69,8 +69,7 @@ int bracketEOL(char* line)
    int *indexQuoteEnd */
 int checkQuote(char* line,int* indexQuoteBegin, int* indexQuoteEnd)
 {
-    char* quoteBegin;
-    char* quoteEnd;
+    char* quoteBegin, quoteEnd;
     if (!line) {
         return 1;
     }

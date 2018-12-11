@@ -53,7 +53,7 @@ char* readSourceFileToBufferWithoutComments(char* file)
 
 void parseDir(char *dirName){
 
-    DIR *dir;
+   /* DIR *dir;
     struct dirent *ent;
     char nextDir[DIR_NAME];
     char ext[3];
@@ -78,5 +78,5 @@ void parseDir(char *dirName){
 	}
 	closedir(dir);
     }
-
+*/
 }
