@@ -11,16 +11,19 @@
 #include "coding_rules.h"
 
 int noMultiDeclaration(char* line) {
-    //char* primaryTypes[55] = {"int", "char", "float", "long", "double", "short", "bool"};
-    //char* substr1, substr2;
+    char* primaryTypes[] = {"int", "char", "float", "long", "double", "short", "bool"};
 
     for (int i = 0; i < 7; i++) {
-        /*if ((substr1 = strstr(line, primaryTypes[i]))) {
-            if ((substr2 = strchr(line, ','))) {
+        if (strstr(line, primaryTypes[i]) && !strchr(line, '(') && !strchr(line, ')')) {
+            if (strchr(line, ',')) {
                 return 1;
             }
+<<<<<<< HEAD
         }*/
         printf("%s ", primaryTypes[i]);
+=======
+        }
+>>>>>>> 378c8a56074a0f2375821b1a1cb6a9f1aabe5c84
     }
 
     return 0;

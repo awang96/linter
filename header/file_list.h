@@ -22,5 +22,6 @@ int addFile(FileList** fl, char* name);
 int delFile(FileList** fl);
 int delFileList(FileList** fl);
 void showFileList(FileList* fl);
+int isInFileList(char *fileName, FileList *fl);
 
 #endif // FILE_LIST_H

@@ -51,29 +51,32 @@ char* readSourceFileToBufferWithoutComments(char* file)
     return removeComments(text);
 }
 
-void parseDir(char *dirName){
+void parseDir(char *dirName, FileList *fl, RuleList *rl, Error **errors){
 
     DIR *dir;
     struct dirent *ent;
     char nextDir[DIR_NAME];
     char ext[3];
+    char *src;
     if((dir = opendir(dirName))){
 	// parsing dirName
 	while((ent = readdir(dir))){
-	    if(!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..")){
+	    if(!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") || !isInFileList(ent->d_name, fl)){
 		continue;
 	    }
 	    strcpy(ext, ent->d_name + strlen(ent->d_name) - 2);
+	    strcpy(nextDir, dirName);
+	    strcat(nextDir, "/");
+	    strcat(nextDir, ent->d_name);
 	    // if ent is a directory, call to parseDir
 	    if(ent->d_type == DT_DIR){
-		strcpy(nextDir, dirName);
-		strcat(nextDir, "/");
-		strcat(nextDir, ent->d_name);
-		parseDir(nextDir);
+		parseDir(nextDir, fl, rl, errors);
 	    }
 	    // if ent is a file, check extension
 	    else if(ent->d_type == DT_REG && (!strcmp(ext, ".c") || !strcmp(ext, ".h"))){
-		printf("%s\n", ent->d_name);
+		src = readSourceFileToBufferWithoutComments(nextDir);
+		applyRulesBuffer(rl, src, errors, ent->d_name);
+		free(src);
 	    }
 	}
 	closedir(dir);

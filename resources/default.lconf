@@ -11,11 +11,8 @@ resources\\parent.lconf
 - unused-variable=on
 
 =excludedFiles
-a.txt
-a.txt
-b.txt
-c.txt
-b.txt
+lconf.h
+file_helper.c
 
 =recursive
 true
