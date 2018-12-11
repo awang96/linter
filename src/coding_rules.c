@@ -20,7 +20,7 @@ int noMultiDeclaration(char* line) {
                 return 1;
             }
         }*/
-        //printf("%s ", primaryTypes[i]);
+        printf("%s ", primaryTypes[i]);
     }
 
     return 0;
