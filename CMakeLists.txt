@@ -43,7 +43,7 @@ add_library(variables header/variables.h src/variables.c)
 
 # file helpers
 add_library(file_helpers src/file_helper.c header/file_helper.h)
-target_link_libraries(file_helpers strings file_list rules rule_list error)
+target_link_libraries(file_helpers strings file_list rules rule_list error coding_norms)
 
 
 add_executable(linter src/main.c header/struct.h)

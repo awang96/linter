@@ -173,9 +173,13 @@ int indent(char* line, int n, int i)
     int countI;
     int countN;
     int countLine = 0;
-    if (!line || n <= 0 || i <= 0) {
+    if (!line || n <= 0 || i < 0) {
         return 1;
     }
+    if(!i && line[0] != ' ')
+	return 0;
+    if(strchr(line, '}'))
+	i--;
     for (countI = 0; countI < i; countI++) {
         for (countN = 0; countN < n; countN++) {
             if (line[countLine] != ' ') {

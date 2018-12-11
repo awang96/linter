@@ -20,7 +20,7 @@
 #include "rules.h"
 #include "rule_list.h"
 #include "error.h"
-
+#include "coding_norms.h"
 
 /**
  * Read the given file into the given buffer

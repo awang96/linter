@@ -58,6 +58,8 @@ void parseDir(char *dirName, FileList *fl, RuleList *rl, Error **errors){
     char nextDir[DIR_NAME];
     char ext[3];
     char *src;
+    RuleList *mut;
+    FILE *f;
     if((dir = opendir(dirName))){
 	// parsing dirName
 	while((ent = readdir(dir))){
@@ -74,6 +76,20 @@ void parseDir(char *dirName, FileList *fl, RuleList *rl, Error **errors){
 	    }
 	    // if ent is a file, check extension
 	    else if(ent->d_type == DT_REG && (!strcmp(ext, ".c") || !strcmp(ext, ".h"))){
+		fprintf(stderr, "**********************************************\n");
+		fprintf(stderr, "%s\n", ent->d_name);
+		fprintf(stderr, "**********************************************\n");
+		mut = rl;
+		while(mut){
+		    if(!strcmp(mut->name, "comments-header") && mut->value){
+			if((f = fopen(nextDir, "r"))){
+			    if(commentsHeader(f))
+				fprintf(stderr, " ^ comments-header\n");
+			}
+			fclose(f);
+		    }
+		    mut = mut->next;
+		}
 		src = readSourceFileToBufferWithoutComments(nextDir);
 		applyRulesBuffer(rl, src, errors, ent->d_name);
 		free(src);

@@ -18,13 +18,7 @@ int noMultiDeclaration(char* line) {
             if (strchr(line, ',')) {
                 return 1;
             }
-<<<<<<< HEAD
-        }*/
-        printf("%s ", primaryTypes[i]);
-=======
         }
->>>>>>> 378c8a56074a0f2375821b1a1cb6a9f1aabe5c84
     }
-
     return 0;
 }

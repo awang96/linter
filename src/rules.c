@@ -17,32 +17,6 @@
 #endif
 
 
-int applyRules(RuleList* rule, FILE* f)
-{
-    char line[200];
-    int nb_line = 0;
-    char* lineWoComment;
-    int comment = 0;
-
-    if (!rule) {
-        return 1;
-    }
-
-    while (fgets(line, 200, f)) {
-        nb_line += 1;
-
-        if ((lineWoComment = removeComment(line, &comment)) == NULL) {
-            printf("%03d |\n", nb_line);
-            continue;
-        }
-
-        printf("%03d | %s", nb_line, lineWoComment);
-        loopRulesOnLine(rule, line, 0);
-    }
-
-    return 0;
-}
-
 int getNbIndents(char* line, int nb_indent) {
     char* substr;
 
@@ -67,13 +41,20 @@ int applyRulesBuffer(RuleList* rule, char* source, Error **errors, char *filenam
     char* dup = strdup(source);
     char* line = strtok(dup, LINE_SEP);
     int nb_indent = 1;
-
+    RuleList *mut = rule;
     while (line) {
         nb_line += 1;
         //nb_indent = getNbIndents(line, nb_indent);
         printf("%03d | %d | %s\n", nb_line, nb_indent, line);
         loopRulesOnLine(rule, line, nb_indent, filename);
         line = strtok(NULL, LINE_SEP);
+    }
+    while(mut){
+	if(!strcmp(mut->name, "max-file-line-numbers") && mut->value){
+	    if(maxFileLineNumbers(nb_line, mut->value))
+		fprintf(stderr, " ^ max-file-line-numbers");
+	}
+	mut = mut->next;
     }
     free(dup);
 
@@ -91,29 +72,36 @@ void loopRulesOnLine(RuleList* rules, char* line, int nb_indent, char* filename)
         //        fprintf(stderr, " ^ this line contains 'char'\n");
         //    }
         //}
-        if (!strcmp(mut->name, "operators-spacing") && mut->value) {
-            if (!operatorsSpacing(line)) { continue; }
-            fprintf(stderr, " ^ operators spacing\n");
-        }
         if (!strcmp(mut->name, "array-bracket-eol") && mut->value) {
             if (bracketEOL(line))
-                printf(" ^ array-bracket-eol\n");
+                fprintf(stderr, " ^ array-bracket-eol\n");
         }
         if (!strcmp(mut->name, "operators-spacing") && mut->value) {
-            //operatorsSpacing(value);
+            if(operatorsSpacing(line))
+		fprintf(stderr, " ^ operators-spacing\n");
         }
         if (!strcmp(mut->name, "comma-spacing") && mut->value) {
             if (commaSpacing(line))
-                printf(" ^ comma-spacing");
+                fprintf(stderr, " ^ comma-spacing\n");
         }
         if (!strcmp(mut->name, "indent") && mut->value) {
+	    if(indent(line, mut->value, nb_indent))
+		fprintf(stderr, " ^ indent\n");
             //indent(value);
         }
         if (!strcmp(mut->name, "no-multi-declaration") && mut->value) {
             if (noMultiDeclaration(line)) {
-                printf(" ^ no-multi-declaration");
+                fprintf(stderr, " ^ no-multi-declaration\n");
             }
         }
+	if(!strcmp(mut->name, "max-line-numbers") && mut->value){
+	    if(maxLineNumbers(line, mut->value))
+		fprintf(stderr, " ^ max-line-numbers\n");
+	}
+	if(!strcmp(mut->name, "no-trailing-spaces") && mut->value){
+	    if(noTrailingSpaces(line))
+		fprintf(stderr, " ^ no-trailing-spaces\n");
+	}
         mut = mut->next;
     }
 }
