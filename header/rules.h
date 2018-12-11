@@ -5,7 +5,7 @@
 
 #include "struct.h"
 #include "coding_norms.h"
-
+#include "coding_rules.h"
 
 #ifndef RULE_H
 #define RULE_H

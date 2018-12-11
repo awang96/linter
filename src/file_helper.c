@@ -9,7 +9,6 @@
 */
 
 #include "file_helper.h"
-#include "file_list.h"
 
 #define DIR_NAME 5555
 
@@ -54,7 +53,7 @@ char* readSourceFileToBufferWithoutComments(char* file)
 
 void parseDir(char *dirName, FileList *fl){
 
-   /* DIR *dir;
+    DIR *dir;
     struct dirent *ent;
     char nextDir[DIR_NAME];
     char ext[3];
@@ -79,5 +78,5 @@ void parseDir(char *dirName, FileList *fl){
 	}
 	closedir(dir);
     }
-*/
+
 }

@@ -14,7 +14,7 @@ int noMultiDeclaration(char* line) {
     char* primaryTypes[] = {"int", "char", "float", "long", "double", "short", "bool"};
 
     for (int i = 0; i < 7; i++) {
-        if (strstr(line, primaryTypes[i]) && !strchr(line, '\(') && !strchr(line, '\)')) {
+        if (strstr(line, primaryTypes[i]) && !strchr(line, '(') && !strchr(line, ')')) {
             if (strchr(line, ',')) {
                 return 1;
             }

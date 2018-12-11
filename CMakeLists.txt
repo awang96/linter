@@ -33,7 +33,7 @@ target_link_libraries(lconf config rule_list file_list)
 
 # rules
 add_library(rules header/rules.h src/rules.c)
-target_link_libraries(rules coding_norms strings)
+target_link_libraries(rules coding_norms strings coding_rules)
 
 # variable rules
 add_library(variable_rules header/variable_rules.h src/variable_rules.c)
@@ -43,7 +43,7 @@ add_library(variables header/variables.h src/variables.c)
 
 # file helpers
 add_library(file_helpers src/file_helper.c header/file_helper.h)
-target_link_libraries(file_helpers strings)
+target_link_libraries(file_helpers strings file_list)
 
 
 add_executable(linter src/main.c header/struct.h)

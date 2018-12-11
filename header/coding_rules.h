@@ -17,7 +17,6 @@
 #ifndef CODING_RULES_H
 #define CODING_RULES_H
 
-
 int noMultiDeclaration(char* line);
 
 #endif // CODING_RULES_H
