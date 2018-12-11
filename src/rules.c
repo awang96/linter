@@ -41,10 +41,31 @@ int applyRules(RuleList* rule, FILE* f)
         }
 
         printf("%03d | %s", nb_line, lineWoComment);
-        loopRulesOnLine(rule, line);
+        loopRulesOnLine(rule, line, 0);
     }
 
     return 0;
+}
+
+int getNbIndents(char* line, int nb_indent) {
+    char* substr;
+
+    if (!line) return nb_indent;
+
+    printf("a\n");
+    while ((substr = strchr(line, '{'))) {
+        printf("%s %d\n", substr, strlen(line));
+        nb_indent++;
+        if (strlen(line) <= 2) break;
+        substr += sizeof(char);
+    }
+    printf("c\n");
+    while ((substr = strchr(line, '}'))) {
+        nb_indent--;
+        substr += sizeof(char);
+    }
+
+    return nb_indent;
 }
 
 
@@ -57,10 +78,13 @@ int applyRulesBuffer(RuleList* rule, char* source)
     // strdup to avoid mutating the original source
     char* dup = strdup(source);
     char* line = strtok(dup, LINE_SEP);
+    int nb_indent = 1;
+
     while (line) {
         nb_line += 1;
-        printf("%03d | %s\n", nb_line, line);
-        loopRulesOnLine(rule, line);
+        //nb_indent = getNbIndents(line, nb_indent);
+        printf("%03d | %d | %s\n", nb_line, nb_indent, line);
+        loopRulesOnLine(rule, line, nb_indent);
         line = strtok(NULL, LINE_SEP);
     }
     free(dup);
@@ -69,13 +93,14 @@ int applyRulesBuffer(RuleList* rule, char* source)
 }
 
 
-void loopRulesOnLine(RuleList* rules, char* line)
+void loopRulesOnLine(RuleList* rules, char* line, int nb_indent)
 {
     RuleList* mut = rules;
+
     while (mut) {
         if (!strcmp(mut->name, "line-contains-char") && mut->value) {
             if (strstr(line, "char")) {
-                fprintf(stderr, "  ^ this line contains 'char'\n");
+                fprintf(stderr, " ^ this line contains 'char'\n");
             }
         }
         if (!strcmp(mut->name, "operators-spacing") && mut->value) {
@@ -83,17 +108,23 @@ void loopRulesOnLine(RuleList* rules, char* line)
             fprintf(stderr, " ^ operators spacing\n");
         }
         if (!strcmp(mut->name, "array-bracket-eol") && mut->value) {
-            // arrayBracketEol(value);
-            // printf("ok %s", line);
+            if (bracketEOL(line))
+                printf(" ^ array-bracket-eol\n");
         }
         if (!strcmp(mut->name, "operators-spacing") && mut->value) {
             //operatorsSpacing(value);
         }
         if (!strcmp(mut->name, "comma-spacing") && mut->value) {
-            //commaSpacing(value);
+            if (commaSpacing(line))
+                printf(" ^ comma-spacing");
         }
         if (!strcmp(mut->name, "indent") && mut->value) {
             //indent(value);
+        }
+        if (!strcmp(mut->name, "no-multi-declaration") && mut->value) {
+            if (noMultiDeclaration(line)) {
+                printf(" ^ no-multi-declaration");
+            }
         }
         mut = mut->next;
     }

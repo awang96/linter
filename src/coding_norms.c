@@ -16,24 +16,29 @@
 /** Return **/
 /* 1 : Failure
    0 : Success */
-int bracketEOL(char* line)
-{
-    int indexBracketLen;
-    char* indexBracket;
-    if (!line) {
-        return 1;
+int bracketEOL(char* line) {
+    int i = 0;
+    int pos;
+    int failure = 0;
+    char* substr;
+
+    if (!line) return 1;
+
+    if ((substr = strchr(line, '{')) != NULL) {
+        if (line[0] == '{') {
+            return 1;
+        }
+        pos = substr - line;
+        failure = 1;
+        while (i < pos) {
+            if (line[i] != ' ') {
+                failure = 0;
+            }
+            i++;
+        }
     }
-    indexBracket = strpbrk(line, "{}");
-    // Check if there is a bracket in the line
-    if (!indexBracket) {
-        return 0;
-    }
-    indexBracketLen = strlen(indexBracket);
-    // Check if the bracket is at EOL or before '\n'
-    if (indexBracketLen == 1 || indexBracketLen == 2) {
-        return 0;
-    }
-    return 1;
+
+    return failure;
 }
 
 /*** Check if there are quotes in the line ***/
@@ -143,6 +148,10 @@ int commaSpacing(char* line)
     }
     indexComma = line;
     while ((indexComma = strchr(indexComma, ','))) {
+        if (*(indexComma + 1) == '\'' && *(indexComma - 1) == '\'') {
+            indexComma += sizeof(char);
+            continue;
+        }
         if (*(indexComma + 1) != ' ') {
             return 1;
         }

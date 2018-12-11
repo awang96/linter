@@ -47,9 +47,14 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
     Config* c = getConfig(argv[1]);
+    printf("ok\n");
     char* source = readSourceFileToBufferWithoutComments("resources/bad_source.c");
     applyRulesBuffer(c->rules, source);
+<<<<<<< HEAD
     parseDir("/home/azerty/Documents/programmes/linter", c->filesExcluded);
+=======
+    //parseDir("/home/azerty/Documents/programmes/linter");
+>>>>>>> 2e9ed412e49191c9b32d02e482b624e6d0833b41
     free(source);
     delConfig(&c);
     return EXIT_SUCCESS;
