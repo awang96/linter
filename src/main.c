@@ -26,13 +26,13 @@ Config* getConfig(char* file)
         return NULL;
     }
     Config* c = getKey(conf);
-    printf("=extends\n");
-    showFileList(c->extends);
-    printf("\n=rules\n");
-    showRuleList(c->rules);
-    printf("\n=excludedFiles\n");
-    showFileList(c->filesExcluded);
-    printf("\n=recursive\n%d\n", c->recursive);
+    //printf("=extends\n");
+    //showFileList(c->extends);
+    //printf("\n=rules\n");
+    //showRuleList(c->rules);
+    //printf("\n=excludedFiles\n");
+    //showFileList(c->filesExcluded);
+    //printf("\n=recursive\n%d\n", c->recursive);
     fclose(conf);
     return c;
 }
@@ -47,12 +47,8 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
     Config* c = getConfig(argv[1]);
-    //printf("ok\n");
-    char* source = readSourceFileToBufferWithoutComments("resources/bad_source.c");
-    applyRulesBuffer(c->rules, source);
-    parseDir("/home/azerty/Documents/programmes/linter", c->filesExcluded);
-    // parseDir("/home/azerty/Documents/programmes/linter");
-    free(source);
+    Error *e;
+    parseDir("/home/azerty/Documents/programmes/linter", c->filesExcluded, c->rules, &e);
     delConfig(&c);
     return EXIT_SUCCESS;
 }

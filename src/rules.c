@@ -8,11 +8,7 @@
 ** Description : Apply rules
 */
 
-#include <rules.h>
-
 #include "rules.h"
-#include "coding_norms.h"
-
 
 #ifdef _WIN32
 #define LINE_SEP "\n\r"
@@ -69,7 +65,7 @@ int getNbIndents(char* line, int nb_indent) {
 }
 
 
-int applyRulesBuffer(RuleList* rule, char* source)
+int applyRulesBuffer(RuleList* rule, char* source, Error **errors, char *filename)
 {
     if (!rule || !source) {
         return 1;
@@ -84,7 +80,7 @@ int applyRulesBuffer(RuleList* rule, char* source)
         nb_line += 1;
         //nb_indent = getNbIndents(line, nb_indent);
         printf("%03d | %d | %s\n", nb_line, nb_indent, line);
-        loopRulesOnLine(rule, line, nb_indent);
+        loopRulesOnLine(rule, line, nb_indent, filename);
         line = strtok(NULL, LINE_SEP);
     }
     free(dup);
@@ -93,16 +89,16 @@ int applyRulesBuffer(RuleList* rule, char* source)
 }
 
 
-void loopRulesOnLine(RuleList* rules, char* line, int nb_indent)
+void loopRulesOnLine(RuleList* rules, char* line, int nb_indent, char* filename)
 {
     RuleList* mut = rules;
 
     while (mut) {
-        if (!strcmp(mut->name, "line-contains-char") && mut->value) {
-            if (strstr(line, "char")) {
-                fprintf(stderr, " ^ this line contains 'char'\n");
-            }
-        }
+        //if (!strcmp(mut->name, "line-contains-char") && mut->value) {
+        //    if (strstr(line, "char")) {
+        //        fprintf(stderr, " ^ this line contains 'char'\n");
+        //    }
+        //}
         if (!strcmp(mut->name, "operators-spacing") && mut->value) {
             if (!operatorsSpacing(line)) { continue; }
             fprintf(stderr, " ^ operators spacing\n");
