@@ -48,18 +48,10 @@ int getNbIndents(char* line, int nb_indent) {
 
     if (!line) return nb_indent;
 
-    printf("a\n");
-    while ((substr = strchr(line, '{'))) {
-        printf("%s %d\n", substr, strlen(line));
-        nb_indent++;
-        if (strlen(line) <= 2) break;
-        substr += sizeof(char);
-    }
-    printf("c\n");
-    while ((substr = strchr(line, '}'))) {
-        nb_indent--;
-        substr += sizeof(char);
-    }
+    if(strchr(line,'{'))
+	nb_indent++;
+    if(strchr(line, '}'))
+	nb_indent--;
 
     return nb_indent;
 }
