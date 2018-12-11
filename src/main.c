@@ -43,12 +43,12 @@ Config* getConfig(char* file)
 /* argv[1] : char*, path to the .lconf file */
 int main(int argc, char** argv)
 {
-    if (argc < 2) {
+    if (argc < 3) {
         return EXIT_FAILURE;
     }
     Config* c = getConfig(argv[1]);
     Error *e;
-    parseDir("/home/azerty/Documents/programmes/linter", c->filesExcluded, c->rules, &e);
+    parseDir(argv[2], c->filesExcluded, c->rules, &e);
     delConfig(&c);
     return EXIT_SUCCESS;
 }

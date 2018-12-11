@@ -9,6 +9,7 @@ resources\\parent.lconf
 - indent=4
 - no-multi-declaration=off
 - unused-variable=on
+- comments-header=on
 
 =excludedFiles
 lconf.h
