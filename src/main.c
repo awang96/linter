@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     Config* c = getConfig(argv[1]);
     char* source = readSourceFileToBufferWithoutComments("resources/bad_source.c");
     applyRulesBuffer(c->rules, source);
-    parseDir("/home/azerty/Documents/programmes/linter");
+    parseDir("/home/azerty/Documents/programmes/linter", c->filesExcluded);
     free(source);
     delConfig(&c);
     return EXIT_SUCCESS;

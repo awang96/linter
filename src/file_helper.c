@@ -9,6 +9,7 @@
 */
 
 #include "file_helper.h"
+#include "file_list.h"
 
 #define DIR_NAME 5555
 
@@ -51,7 +52,7 @@ char* readSourceFileToBufferWithoutComments(char* file)
     return removeComments(text);
 }
 
-void parseDir(char *dirName){
+void parseDir(char *dirName, FileList *fl){
 
     DIR *dir;
     struct dirent *ent;
@@ -60,7 +61,7 @@ void parseDir(char *dirName){
     if((dir = opendir(dirName))){
 	// parsing dirName
 	while((ent = readdir(dir))){
-	    if(!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..")){
+	    if(!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") || !isInFileList(ent->d_name, fl)){
 		continue;
 	    }
 	    strcpy(ext, ent->d_name + strlen(ent->d_name) - 2);
@@ -69,7 +70,7 @@ void parseDir(char *dirName){
 		strcpy(nextDir, dirName);
 		strcat(nextDir, "/");
 		strcat(nextDir, ent->d_name);
-		parseDir(nextDir);
+		parseDir(nextDir, fl);
 	    }
 	    // if ent is a file, check extension
 	    else if(ent->d_type == DT_REG && (!strcmp(ext, ".c") || !strcmp(ext, ".h"))){

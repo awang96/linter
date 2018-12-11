@@ -16,6 +16,7 @@
 #include <string.h>
 #include <dirent.h>
 #include "strings.h"
+#include "file_list.h"
 
 
 /**
@@ -41,6 +42,6 @@ char* readSourceFileToBufferWithoutComments(char* file);
  * @param dirName : path of the directory to parse
  * @return
 */
-void parseDir(char *dirName);
+void parseDir(char *dirName, FileList *fl);
 
 #endif //LINTER_FILE_H

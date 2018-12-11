@@ -140,3 +140,26 @@ void showFileList(FileList* fl)
     }
 
 }
+
+/*** Check if fileName is in fl ***/
+/** Param **/
+/*char *fileName : name of the file to find
+  FileList *fl : list of filenames */
+/** Return **/
+/* 0 : Success
+   1 : Failure */
+int isInFileList(char *fileName, FileList *fl){
+
+    FileList *p;
+    if(!fileName || !fl)
+	return 1;
+    p = fl;
+    while(p){
+	//printf("%s : %s\n", fileName, p->name);
+	if(!strcmp(fileName, p->name))
+	    return 0;
+	p = p->next;
+    } 
+    return 1;
+
+}

@@ -9,11 +9,8 @@ resources\\parent.lconf
 - indent=4
 
 =excludedFiles
-a.txt
-a.txt
-b.txt
-c.txt
-b.txt
+lconf.h
+file_helper.c
 
 =recursive
 true
